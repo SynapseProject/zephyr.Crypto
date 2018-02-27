@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zephyr.Crypto", "zephyr.Crypto\zephyr.Crypto.csproj", "{CC994778-78BF-482D-9E48-4B0348F9F567}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{A862A442-FF7F-45D4-A548-E654C96C80A4}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\AssemblyInfo.xml = scripts\AssemblyInfo.xml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC994778-78BF-482D-9E48-4B0348F9F567}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC994778-78BF-482D-9E48-4B0348F9F567}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC994778-78BF-482D-9E48-4B0348F9F567}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC994778-78BF-482D-9E48-4B0348F9F567}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C49A0014-2794-43D8-957B-737B9F64370A}
+	EndGlobalSection
+EndGlobal
