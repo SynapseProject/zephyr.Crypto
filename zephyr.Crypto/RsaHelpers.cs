@@ -83,7 +83,7 @@ namespace Zephyr.Crypto
 
         public static string Encrypt(RSACryptoServiceProvider rsa, string value)
         {
-            byte[] valueBytes = ASCIIEncoding.ASCII.GetBytes( value );
+            byte[] valueBytes = Encoding.ASCII.GetBytes( value );
             byte[] encrypted = rsa.Encrypt( valueBytes, false );
             return Convert.ToBase64String( encrypted );
         }
@@ -102,7 +102,7 @@ namespace Zephyr.Crypto
         {
             byte[] valueBytes = Convert.FromBase64String( value );
             byte[] decrypted = rsa.Decrypt( valueBytes, false );
-            return ASCIIEncoding.ASCII.GetString( decrypted );
+            return Encoding.ASCII.GetString( decrypted );
         }
         #endregion
     }
