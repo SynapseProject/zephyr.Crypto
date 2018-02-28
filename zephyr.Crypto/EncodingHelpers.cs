@@ -4,27 +4,27 @@ using System.Text;
 
 namespace Zephyr.Crypto
 {
-    public class StringHelpers
+    public class EncodingHelpers
     {
         #region base64
-        public static string Base64Encode(string value)
+        public static string ToBase64(string value)
         {
-            byte[] valueBytes = ASCIIEncoding.ASCII.GetBytes( value );
+            byte[] valueBytes = Encoding.ASCII.GetBytes( value );
             return Convert.ToBase64String( valueBytes );
         }
 
-        public static string Base64EncodeFromBytes(byte[] valueBytes)
+        public static string ToBase64(byte[] valueBytes)
         {
             return Convert.ToBase64String( valueBytes );
         }
 
-        public static string Base64Decode(string value)
+        public static string FromBase64(string value)
         {
             byte[] valueBytes = Convert.FromBase64String( value );
-            return ASCIIEncoding.ASCII.GetString( valueBytes );
+            return Encoding.ASCII.GetString( valueBytes );
         }
 
-        public static byte[] Base64DecodeToBytes(string value)
+        public static byte[] FromBase64ToBytes(string value)
         {
             return Convert.FromBase64String( value );
         }
@@ -34,7 +34,7 @@ namespace Zephyr.Crypto
             try
             {
                 byte[] valueBytes = Convert.FromBase64String( encodedValue );
-                decodedValue = ASCIIEncoding.ASCII.GetString( valueBytes );
+                decodedValue = Encoding.ASCII.GetString( valueBytes );
                 return true;
             }
             catch
