@@ -41,9 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RsaHelpers.cs" />
+    <Compile Include="Classes\RsaHelpers.cs" />
+    <Compile Include="Classes\ZephyrCommandLine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EncodingHelpers.cs" />
+    <Compile Include="Classes\EncodingHelpers.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
