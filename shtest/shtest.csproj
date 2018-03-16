@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CC994778-78BF-482D-9E48-4B0348F9F567}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Zephyr.Crypto</RootNamespace>
-    <AssemblyName>Zephyr.Crypto</AssemblyName>
+    <ProjectGuid>{C4636F3B-C564-425F-B985-A48C7A03B4F8}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>shtest</RootNamespace>
+    <AssemblyName>shtest</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,14 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\RijndaelHelpers.cs" />
-    <Compile Include="Classes\RsaHelpers.cs" />
-    <Compile Include="Classes\ZephyrCommandLine.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Classes\EncodingHelpers.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\zephyr.Crypto\zephyr.Crypto.csproj">
+      <Project>{cc994778-78bf-482d-9e48-4b0348f9f567}</Project>
+      <Name>zephyr.Crypto</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent>powershell.exe -ExecutionPolicy Bypass -NoProfile -NonInteractive -File "$(SolutionDir)scripts\setVersion.ps1" -path "$(ProjectDir)Properties\AssemblyInfo.cs" -versionFile "$(SolutionDir)scripts\AssemblyInfo.xml"</PreBuildEvent>
-  </PropertyGroup>
 </Project>
