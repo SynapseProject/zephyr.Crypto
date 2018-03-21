@@ -12,8 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{A862
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zephyr.Crypto.UnitTests", "zephyr.Crypto.UnitTests\zephyr.Crypto.UnitTests.csproj", "{B650E0CE-AD7C-4528-9B2A-7DED662AA477}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shtest", "shtest\shtest.csproj", "{C4636F3B-C564-425F-B985-A48C7A03B4F8}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,10 +26,6 @@ Global
 		{B650E0CE-AD7C-4528-9B2A-7DED662AA477}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B650E0CE-AD7C-4528-9B2A-7DED662AA477}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B650E0CE-AD7C-4528-9B2A-7DED662AA477}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C4636F3B-C564-425F-B985-A48C7A03B4F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C4636F3B-C564-425F-B985-A48C7A03B4F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C4636F3B-C564-425F-B985-A48C7A03B4F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C4636F3B-C564-425F-B985-A48C7A03B4F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

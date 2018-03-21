@@ -125,5 +125,11 @@ namespace zephyr.Crypto.UnitTests
             RsaHelpers.GenerateRsaKeys(pubPrivFilePath: _pubPrivFilePath);
             Assert.Throws<FormatException>(() => RsaHelpers.Decrypt(filePath: _pubPrivFilePath, value: _encryptedText+"x"));
         }
+        [Test]
+        [Category("Rsa")]
+        public void Decrypt_FromContainer_InvalidContainerName()
+        {
+            Assert.Throws<CryptographicException>(() => RsaHelpers.Decrypt(keyContainerName: "nosuchcontainer", value: _encryptedText));
+        }
     }
 }

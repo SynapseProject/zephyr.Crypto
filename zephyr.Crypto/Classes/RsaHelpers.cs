@@ -115,8 +115,10 @@ namespace Zephyr.Crypto
                 throw new ArgumentException("Invalid argument");
 
             RSACryptoServiceProvider rsa = null;
-            if (!string.IsNullOrWhiteSpace(keyContainerName))   // container name takes precedence over file
-                rsa = LoadRsaKeys(keyContainerName: keyContainerName, flags: flags);
+            // container name takes precedence over file
+            if (!string.IsNullOrWhiteSpace(keyContainerName))   
+                // set the UseExistingKey so that rsacryptoserviceprovider doesnt go and generate new keys
+                rsa = LoadRsaKeys(keyContainerName: keyContainerName, flags: flags | CspProviderFlags.UseExistingKey);
             else if (!string.IsNullOrWhiteSpace(filePath))
                 rsa = LoadRsaKeys(filePath: filePath, flags: flags);
             else
