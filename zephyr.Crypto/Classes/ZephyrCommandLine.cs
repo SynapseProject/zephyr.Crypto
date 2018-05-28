@@ -42,7 +42,7 @@ public class ZephyrCommandLine
                     else if (a.Action == ActionType.Decrypt)
                         RsaDecrypt(a.Data, a.KeyContainerName, a.KeyFile, a.Flags, a.ShowActionHelp);
                     else if (a.Action == ActionType.GenKey)
-                        RsaGenKey(a.KeyContainerName, a.KeyFile, a.ShowActionHelp);
+                        RsaGenKey(a.KeyContainerName, a.KeyFile, a.KeySize, a.ShowActionHelp);
 
                     break;
             }
@@ -185,14 +185,15 @@ public class ZephyrCommandLine
             Console.WriteLine(RsaHelpers.Decrypt(keyContainerName: keyContainerName, filePath: keyFilePath, flags: flags, value: data));
         }
     }
-    static void RsaGenKey(string keyContainerName, string keyFile, bool showHelp)
+    static void RsaGenKey(string keyContainerName, string keyFile, int keySize, bool showHelp)
     {
         if (showHelp)
         {
             List<Parameter> parms = new List<Parameter>
                 {
                     new Parameter{ Key= "[kcn]", Type = typeof(string), HelpText = "Key container name"},
-                    new Parameter{ Key= "[keyFile]", Type = typeof(string), HelpText = "Path to key files"}
+                    new Parameter{ Key= "[keyFile]", Type = typeof(string), HelpText = "Path to key files"},
+                    new Parameter{ Key= "[keySize]", Type = typeof(int), HelpText = "Key size"}
                 };
             ConsoleColor defaultColor = Console.ForegroundColor;
             Console_WriteLine($"Parameter options for Rsa genkey:\r\n", ConsoleColor.Green);
@@ -208,9 +209,9 @@ public class ZephyrCommandLine
         {
             Console.WriteLine("Generating Rsa key pair.\r\n");
             if (string.IsNullOrWhiteSpace(keyFile))
-                RsaHelpers.GenerateRsaKeys(keyContainerName);
+                RsaHelpers.GenerateRsaKeys(keyContainerName: keyContainerName, keySize: keySize);
             else
-                RsaHelpers.GenerateRsaKeys(keyContainerName, $"{keyFile}.pubPriv", $"{keyFile}.pubOnly");
+                RsaHelpers.GenerateRsaKeys(keyContainerName: keyContainerName, pubPrivFilePath: $"{keyFile}.pubPriv", pubOnlyFilePath: $"{keyFile}.pubOnly", keySize: keySize);
             
             if (!string.IsNullOrWhiteSpace(keyContainerName))
             {
@@ -392,6 +393,7 @@ internal class Arguments
     public string SaltValue { get; internal set; }
     public string InitializationVector { get; internal set; }
     public string KeyFile { get; internal set; }
+    public int KeySize { get; internal set; }
     public string KeyContainerName { get; internal set; }
     public CspProviderFlags Flags { get; internal set; }
 
@@ -400,6 +402,7 @@ internal class Arguments
     const string __saltvalue = "salt";
     const string __initializationvector = "iv";
     const string __keyfile = "keyfile";
+    const string __keysize = "keysize";
     const string __keycontainername = "kcn";
     const string __flags = "flags";
 
@@ -640,7 +643,20 @@ internal class Arguments
             }
             Parms.Remove(__keyfile);
         }
-        
+
+        if (Parms.Keys.Contains(__keysize))
+        {
+            if (int.TryParse(Parms[__keysize], out int value))
+            {
+                KeySize = value;
+            }
+            else
+            {
+                // default to 0
+                KeySize = 0;
+            }
+            Parms.Remove(__keysize);
+        }
         //else
         //{
         //    Message += "  * Key File path not specified.\r\n";
