@@ -62,10 +62,25 @@ namespace Zephyr.Crypto
                 return rsaKey;
             else
             {
-                using( StreamReader sr = new StreamReader( filePath ) )
+                try
                 {
-                    rsaKey.FromXmlString( sr.ReadToEnd() );
+                    Uri uri = new Uri( filePath );
+                    string uriContent = WebRequestClient.GetString( uri.ToString() );
+                    rsaKey.FromXmlString( uriContent );
                 }
+                catch
+                {
+                    try
+                    {
+                        using( StreamReader sr = new StreamReader( filePath ) )
+                            rsaKey.FromXmlString( sr.ReadToEnd() );
+                    }
+                    catch( Exception innerEx )
+                    {
+                        throw new FileNotFoundException( $"Could not load RSA keys from [{filePath}].", innerEx );
+                    }
+                }
+
                 return rsaKey;
             }
         }

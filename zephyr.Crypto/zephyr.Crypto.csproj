@@ -33,6 +33,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,9 +45,11 @@
   <ItemGroup>
     <Compile Include="Classes\RijndaelHelpers.cs" />
     <Compile Include="Classes\RsaHelpers.cs" />
-    <Compile Include="Classes\ZephyrCommandLine.cs" />
+    <Compile Include="cli\ZephyrCommandLine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\EncodingHelpers.cs" />
+    <Compile Include="Utilities\ExceptionConverter.cs" />
+    <Compile Include="Utilities\WebRequestClient.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
