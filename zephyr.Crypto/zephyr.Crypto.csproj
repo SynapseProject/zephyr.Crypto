@@ -1,58 +1,47 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CC994778-78BF-482D-9E48-4B0348F9F567}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Zephyr.Crypto</RootNamespace>
+    <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.18344.0</FileVersion>
+    <Version>1.0.18344.0</Version>
+    <PackageReleaseNotes>All features are presently working and passing unit tests.
+
+- 1.0.18344: Added .net standard 2.0 to package
+- 1.0.18336: Added file/http URI support for opening RSA file keys
+- 1.0.18146: Added support for including keySize on RSA key generation, separated Encrypt/DecryptFromFileKeys and Encrypt/DecryptFromContainerKeys, added support for Rijndael symmetric encryption, added support for usage from zephyr.cli
+- 1.0.18058: Added RSA and Base64 utilities.</PackageReleaseNotes>
+    <Description>Zephyr is the namespace for utility libraries in Synapse; Zephyr utilities are suitable for stand-alone usage outside Synapse. Synapse is a lightweight execution engine for unifying federated data sources and processes. The Crypto utilitiy library supports RSA and Rijndael encrryption and Base64 encoding helpers. https://synapseproject.github.io/</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Zephyr.Crypto</PackageId>
+    <Authors>Steve Shortt</Authors>
+    <Product>Zephyr.Crypto</Product>
+    <PackageIconUrl>https://raw.githubusercontent.com/SynapseProject/synapseproject.github.io/master/images/zephyr_logo_64x64.png</PackageIconUrl>
+    <PackageProjectUrl>http://synapse.readthedocs.io/en/latest/</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/SynapseProject/zephyr.Crypto/master/LICENSE</PackageLicenseUrl>
+    <Copyright></Copyright>
+    <RepositoryUrl>https://github.com/SynapseProject/zephyr.Crypto</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>RSA Rijndael Cryptography Base64 Encode Decode Encrypt Decrypt</PackageTags>
     <AssemblyName>Zephyr.Crypto</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel.Web" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
+
+    <!-- Conditionally obtain references for the .NET Framework 4.5 target -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\RijndaelHelpers.cs" />
-    <Compile Include="Classes\RsaHelpers.cs" />
-    <Compile Include="cli\ZephyrCommandLine.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Classes\EncodingHelpers.cs" />
-    <Compile Include="Utilities\ExceptionConverter.cs" />
-    <Compile Include="Utilities\WebRequestClient.cs" />
+    <Compile Remove="Classes\Impersonation\**" />
+    <EmbeddedResource Remove="Classes\Impersonation\**" />
+    <None Remove="Classes\Impersonation\**" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent>powershell.exe -ExecutionPolicy Bypass -NoProfile -NonInteractive -File "$(SolutionDir)scripts\setVersion.ps1" -path "$(ProjectDir)Properties\AssemblyInfo.cs" -versionFile "$(SolutionDir)scripts\AssemblyInfo.xml"</PreBuildEvent>
-  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="powershell.exe -ExecutionPolicy Bypass -NoProfile -NonInteractive -File $(SolutionDir)scripts\setVersion.ps1 -path $(ProjectPath) -versionFile $(SolutionDir)scripts\AssemblyInfo.xml" />
+  </Target>
+
 </Project>
