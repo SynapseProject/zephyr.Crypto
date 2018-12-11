@@ -205,6 +205,7 @@ namespace Zephyr.Crypto
         }
     }
 
+    //https://github.com/dotnet/core/issues/874
     public static class RsaExtensions
     {
         public static void FromXmlStringZephyr(this RSA rsa, string xmlString)
